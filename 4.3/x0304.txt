@@ -1,0 +1,10 @@
+ret to libc
+
+Solution :
+
+	1- find system return address
+	2- 4 bytes are where is gonna end
+	3- where is the system parameter 
+	4- wrtie the command /bin/id finish with \x00 
+
+echo -ne "........................................................................................................................................................................................................"
